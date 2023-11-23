@@ -1,0 +1,63 @@
+/* Add your custom styles for a materialistic appearance */
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f8f9fa;
+    color: #212529;
+}
+
+.container {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+h1, h2, h3 {
+    color: #1976D2;
+}
+
+.table th, .table td {
+    text-align: center;
+}
+
+.table th {
+    background-color: #1976D2;
+    color: #ffffff;
+}
+
+.btn-primary {
+    background-color: #1976D2;
+    border-color: #1976D2;
+}
+
+.btn-primary:hover {
+    background-color: #1565C0;
+    border-color: #1565C0;
+}
+
+.btn-success {
+    background-color: #4CAF50;
+    border-color: #4CAF50;
+}
+
+.btn-success:hover {
+    background-color: #45a049;
+    border-color: #45a049;
+}
+
+.btn-danger {
+    background-color: #DC3545;
+    border-color: #DC3545;
+}
+
+.btn-danger:hover {
+    background-color: #c82333;
+    border-color: #c82333;
+}
+
+#uploadForm {
+    margin-top: 20px;
+}
+
+/* Add more styles as needed */

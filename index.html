@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />    <title>MTSA Rank List</title>
+</head>
+<body>
+
+    <div class="container mt-5">
+        <h1 class="text-center">MTSA Rank List</h1>
+
+        <div class="text-center mt-3">
+            <p>Last Updated: <span id="lastUpdated"></span></p>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-md-6">
+                <h2 class="text-center">HS Section</h2>
+                <input type="text" id="hsSearch" class="form-control mb-2" placeholder="Search HS Section">
+                <table id="hsTable" class="table table-dark table-striped-columns">
+                    <thead>
+                        <tr>
+                            <th>Rank</th>
+                            <th>Name</th>
+                            <th>Class</th>
+                            <th>Hours Awarded</th>
+                            <th>Change in Rank</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Data rows for the HS Section table will be dynamically added -->
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="col-md-6">
+                <h2 class="text-center">UP Section</h2>
+                <input type="text" id="upSearch" class="form-control mb-2" placeholder="Search UP Section">
+                <table id="upTable" class="table table-dark table-striped-columns">
+                    <thead>
+                        <tr>
+                            <th>Rank</th>
+                            <th>Name</th>
+                            <th>Class</th>
+                            <th>Hours Awarded</th>
+                            <th>Change in Rank</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Data rows for the UP Section table will be dynamically added -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="text-center mt-4">
+            <button class="btn btn-primary" onclick="openUploadForm()">Upload Excel</button>
+        </div>
+
+        <div id="uploadForm" class="container mt-4 d-none">
+            <h2 class="text-center">Upload Excel</h2>
+            <form id="uploadExcelForm">
+                <div class="form-group">
+                    <label for="fileInput">Select Excel File:</label>
+                    <!-- Add this input element to your HTML for file upload -->
+                    <input type="file" id="fileInput" accept=".xlsx, .xls" onchange="handleFileSelect()">
+                </div>
+                <button type="button" class="btn btn-success" onclick="importExcel()">Upload</button>
+                <button type="button" class="btn btn-danger" onclick="closeUploadForm()">Close</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.1/xlsx.full.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

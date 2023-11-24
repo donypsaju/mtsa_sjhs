@@ -162,17 +162,24 @@ function updateTable(tableId, data) {
     });
 
 }
-
-// Function to get change in rank text
+// Function to get change in rank text with color
 function getChangeInRankText(changeInRank) {
+    let textColor = ''; // Default text color
+
     if (changeInRank > 0) {
-        return `<i class="fas fa-caret-up"></i> ${Math.abs(changeInRank)} `;
+        textColor = 'green'; // Change text color to green for positive change
     } else if (changeInRank < 0) {
-        return `<i class="fas fa-caret-down"></i> ${Math.abs(changeInRank)} `;
+        textColor = 'red'; // Change text color to red for negative change
     } else {
-        return 'No change in rank';
+        textColor = 'white'; // Change text color to white for no change
     }
+
+    return `<span style="color: ${textColor};">
+                <i class="fas fa-caret-${changeInRank > 0 ? 'up' : (changeInRank < 0 ? 'down' : '')}"></i>
+                ${Math.abs(changeInRank)}
+            </span>`;
 }
+
 
 // Function to handle search for HS Section
 function searchHS() {

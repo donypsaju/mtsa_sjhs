@@ -9,6 +9,8 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 
+
+
 function openUploadForm() {
     // Assuming you want to prompt for a password before opening the upload form
     const password = prompt('Enter password:');
@@ -16,7 +18,7 @@ function openUploadForm() {
     // Check if the password is correct ("sjhs@2008")
     if (password === 'sjhs@2008') {
         // Show the upload form
-        document.getElementById('uploadForm').classList.remove('d-none');
+        $('#uploadModal').modal('show');
     } else {
         alert('Incorrect password. Access denied.');
     }
@@ -218,7 +220,7 @@ function openUpdateForm() {
 
 // Function to close the upload form
 function closeUploadForm() {
-    document.getElementById('uploadForm').classList.add('d-none');
+    $('#uploadModal').modal('hide');
     // Clear the file input value when closing the form
     document.getElementById('fileInput').value = '';
 }
@@ -290,3 +292,4 @@ lastUpdatedElement.textContent = new Date().toLocaleString();
         reader.readAsBinaryString(file);
     }
 }
+

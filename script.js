@@ -9,6 +9,10 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 
+// Function to open the activities modal
+function openActivitiesModal() {
+    $('#activitiesModal').modal('show');
+}
 
 
 function openUploadForm() {

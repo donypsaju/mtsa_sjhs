@@ -1,63 +1,47 @@
-/* Add your custom styles for a materialistic appearance */
-
 body {
-    font-family: 'Roboto', sans-serif;
-    background-color: #f8f9fa;
-    color: #212529;
+    background-color: #f5f5f5;
+    padding-top: 20px;
 }
 
 .container {
-    background-color: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
     padding: 20px;
+    margin-bottom: 20px;
 }
 
-h1, h2, h3 {
-    color: #1976D2;
-}
-
-.table th, .table td {
-    text-align: center;
-}
-
-.table th {
-    background-color: #1976D2;
-    color: #ffffff;
+.form-control {
+    border-color: #ccc;
+    box-shadow: none;
 }
 
 .btn-primary {
-    background-color: #1976D2;
-    border-color: #1976D2;
+    background-color: #007bff;
+    border-color: #007bff;
 }
 
 .btn-primary:hover {
-    background-color: #1565C0;
-    border-color: #1565C0;
+    background-color: #0056b3;
+    border-color: #0056b3;
 }
 
-.btn-success {
-    background-color: #4CAF50;
-    border-color: #4CAF50;
+.table {
+    background-color: #fff;
 }
 
-.btn-success:hover {
-    background-color: #45a049;
-    border-color: #45a049;
+.modal-content {
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 }
 
-.btn-danger {
-    background-color: #DC3545;
-    border-color: #DC3545;
+.btn-secondary {
+    background-color: #6c757d;
+    border-color: #6c757d;
 }
 
-.btn-danger:hover {
-    background-color: #c82333;
-    border-color: #c82333;
+.btn-secondary:hover {
+    background-color: #5a6268;
+    border-color: #5a6268;
 }
-
-#uploadForm {
-    margin-top: 20px;
-}
-
-/* Add more styles as needed */

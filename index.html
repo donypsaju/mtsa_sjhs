@@ -3,301 +3,118 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <title>Student Management System</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <style>
-        /* Add this CSS to your existing styles */
-
-.table-container {
-    max-height: 400px; /* Set the maximum height for the table container */
-    overflow-y: auto; /* Enable vertical scrolling for overflow */
-}
-
-/* Add this CSS to ensure the table header stays fixed while scrolling */
-.table-container table thead {
-    position: sticky;
-    top: 0;
-    background-color: #343a40;
-    z-index: 1;
-}
-
-    .fixed-header {
-        position: sticky;
-        top: 0;
-        background-color: #343a40;
-        z-index: 1000;
-    }
-
-    .search-bar {
-        position: sticky;
-        top: 0;
-        background-color: #343a40;
-        z-index: 1000;
-        padding: 10px;
-    }
-
-    /* Fix the table header */
-    .fixed-header th {
-        position: sticky;
-        top: 0;
-        background-color: #343a40;
-        color: white;
-    }
-    </style>
-    <title>MTSA Rank List</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 </head>
-<body class="bg-dark">
+<body>
 
-    <div class="container mt-5">
-        <h1 class="text-center">MTSA Ranking System - SJ HS Kurumannu</h1>
-
-        <!-- ... (your existing HTML code) ... -->
-
-<div class="text-center mt-3">
-    <p>Last Updated: <span id="lastUpdated"></span></p>
-    <button class="btn btn-primary" onclick="openUploadForm()">
-        <i class="fas fa-upload"></i> Upload Excel
-    </button>
-    <button class="btn btn-info" onclick="openActivitiesModal()">
-        <i class="fas fa-clipboard-list"></i> Activities List
-    </button>
+<!-- Search Box -->
+<div class="container mb-3">
+    <input type="text" id="searchInput" class="form-control" placeholder="Search for a student...">
 </div>
 
-<!-- ... (your existing HTML code) ... -->
+<!-- Add Student Button -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addStudentModal">
+    <i class="fas fa-user-plus"></i> Add Student
+</button>
 
-<!-- Modal for Activities List -->
-<div class="modal" id="activitiesModal" tabindex="-1" role="dialog" aria-labelledby="activitiesModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+<!-- Student Table -->
+<table class="table">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Class</th>
+            <th>Hours Awarded</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody id="studentTableBody">
+        <!-- Table rows will be dynamically added here -->
+    </tbody>
+</table>
+
+<!-- Pop-up Form for Adding Student -->
+<div class="modal fade" id="addStudentModal" tabindex="-1" aria-labelledby="addStudentModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
         <div class="modal-content">
-
-            <!-- Modal Header -->
-            <div class="modal-header">
-                <h4 class="modal-title">Activities List</h4>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
-
-            <!-- Modal Body -->
-            <div class="modal-body">
-                <!-- List of 24 activities with sections (activity and score) -->
-                <ol>
-                    <li>
-                        <strong>സ്നേഹത്തോടെ ഒരു പൊതിച്ചോറ്</strong>
-                        <span class="ml-2">(1 മണിക്കൂർ/ പാക്കറ്റ്)</span>
-                    </li>
-                    <li>
-                        <strong>പ്ലാസ്റ്റിക് നിർമാർജ്ജനം</strong>
-                        <span class="ml-2">(1 മണിക്കൂർ / 10 കിലോ)</span>
-                    </li>
-                    <li>
-                        <strong>തൊഴിലുറപ്പുകാരോട് തോളോട് തോൾ ചേർന്ന് പ്രവർത്തിക്കുക</strong>
-                        <span class="ml-2">(1 മണിക്കൂർ / 1 മണിക്കൂർ)</span>
-                    </li>
-                    <li>
-                        <strong>മാതാപിതാക്കളുടെ കൂടെ അഗതിമന്ദിരങ്ങൾ / ആശുപത്രികൾ / പാലിയേറ്റീവ് കെയർ / അനാഥശാല സന്ദർശനം</strong>
-                        <span class="ml-2">(2 മണിക്കൂർ)</span>
-                    </li>
-
-                    <li>
-                        <strong>പഴയ നല്ല വസ്ത്രങ്ങൾ ശേഖരിച്ച് കഴുകി വൃത്തിയാക്കി, തേച്ചു മടക്കി സ്‌കൂളിൽ എത്തിക്കുക</strong>
-                        <span class="ml-2">(10 പീസ്/ 2 മണിക്കൂർ)</span>
-                    </li>
-
-                    <li>
-                        <strong>സ്കൂൾ പരിസരം (തനിച്ചോ, ഗ്രൂപ്പായോ ) ശുചിയാക്കുക</strong>
-                        <span class="ml-2">(1 മണിക്കൂർ / വിദ്യാർത്ഥി)</span>
-                    </li>
-
-                    <li>
-                        <strong>വീടിനടുത്ത് ഒറ്റയ്ക്ക് കഴിയുന്ന വൃദ്ധജനങ്ങളെ മാതാപിതാക്കളോടൊപ്പം സന്ദർശിക്കുക.</strong>
-                        <span class="ml-2">(2 മണിക്കൂർ)</span>
-                    </li>
-
-                    <li>
-                        <strong>വീടിനടുത്തുള്ള ചേരി പ്രദേശങ്ങളിൽ / ആദിവാസി കോളനികളിൽ (തനിച്ചോ, ഗ്രൂപ്പായോ ) മാതാപിതാക്കളുടെ കൂടെ ചെന്ന് കുട്ടികളെ പഠിപ്പിക്കുക.</strong>
-                        <span class="ml-2">(2 മണിക്കൂർ / വിദ്യാർത്ഥി)</span>
-                    </li>
-
-                    <li>
-                        <strong>വീട്ടിൽ മിച്ചം വരുന്ന പഴങ്ങളോ പച്ചക്കറികളോ സ്‌കൂളിൽ കൊണ്ടുവന്നു അർഹരായവർക്ക് വിതരണം ചെയ്യുക.</strong>
-                        <span class="ml-2">(1 മണിക്കൂർ)</span>
-                    </li>
-
-                    <li>
-                        <strong>സ്കൂളിലെ പഠനത്തിൽ പിന്നോക്കം നിൽക്കുന്ന കുട്ടികളെ പഠിക്കാൻ സഹായിക്കുക.</strong>
-                        <span class="ml-2">(1 മണിക്കൂർ)</span>
-                    </li>
-
-                    <li>
-                        <strong>മാതാപിതാക്കളുടെ സഹായത്തോടെ തുണി സഞ്ചി തയ്ച്ചു സ്‌കൂളിൽ ഏല്പിക്കുക</strong>
-                        <span class="ml-2">(10 എണ്ണം / 1 മണിക്കൂർ)</span>
-                    </li>
-
-                    <li>
-                        <strong>കളിപ്പാട്ടങ്ങൾ ശേഖരിച്ച് ആവശ്യമുള്ളവർക്ക് സമ്മാനിക്കുക</strong>
-                        <span class="ml-2">(25 എണ്ണം / 2 മണിക്കൂർ)</span>
-                    </li>
-                    
-                    <li>
-                        <strong>വീടിനടുത്ത് ഒറ്റയ്ക്ക് കഴിയുന്ന വൃദ്ധജനങ്ങൾക്ക് ആവശ്യമായ മരുന്നോ ഭക്ഷണ സാധനങ്ങളോ ആറു മാസക്കാലം കടയിൽ നിന്ന് വാങ്ങിച്ചു കൊണ്ടു കൊടുക്കുക</strong>
-                        <span class="ml-2">(2 മണിക്കൂർ)</span>
-                    </li>
-
-                    <li>
-                        <strong>സഹപാഠികളിൽ സാമ്പത്തിക ബുദ്ധിമുട്ടനുഭവിക്കുന്ന കുട്ടികൾക്ക് മാതാപിതാക്കളുടെയും ടിച്ചറുടെയും അറിവോടെ 1000 രൂപയിൽ കുറയാത്ത സഹായം ചെയ്യുക.</strong>
-                        <span class="ml-2">(2 മണിക്കൂർ)</span>
-                    </li>
-
-                    <li>
-                        <strong>ക്ലാസ് ടീച്ചറുടെ ജന്മദിനത്തിൽ കുട്ടികളും ടീച്ചറും ചേർന്ന് കിടപ്പിലായ ഒരു രോഗിയെ സന്ദർശിച്ച് സ്നേഹ സമ്മാനം നൽകുക.</strong>
-                        <span class="ml-2">(1 മണിക്കൂർ / വിദ്യാർത്ഥി)</span>
-                    </li>
-
-                    <li>
-                        <strong>വീട്ടിൽ നിന്ന് പാചകം ചെയ്തു കൊണ്ട് വന്ന ഭക്ഷണ സാധനങ്ങൾ സ്‌കൂൾ അങ്കണത്തിൽ വില്പന നടത്തി പണം സ്വരൂപിച്ച് അർഹതപ്പെട്ടവർക്ക് സമ്മാനിക്കുക</strong>
-                        <span class="ml-2">(2 മണിക്കൂർ)</span>
-                    </li>
-
-                    <li>
-                        <strong>മാതാപിതാക്കളുടെ സഹായത്തോടെ വീട്ടിൽ പച്ചക്കറിത്തോട്ടം നിർമ്മിച്ച് പരിപാലിക്കുക</strong>
-                        <span class="ml-2">(5 മണിക്കൂർ)</span>
-                    </li>
-
-                    <li>
-                        <strong>മാതാപിതാക്കളുടെ സഹായത്തോടെ പണം സമാഹരിച്ച് അർഹതപ്പെട്ട ഒരു വിദ്യാർത്ഥിക്ക് വീട് പണിതു നൽകുക</strong>
-                        <span class="ml-2">(20 മണിക്കൂർ)</span>
-                    </li>
-
-                    <li>
-                        <strong>മാതാപിതാക്കളുടെ സഹായത്തോടെ അർഹതപ്പെട്ട ഒരു വിട്ടിലേക്ക് ഒരു മാസം ആവശ്യമായ പലചരക്കു സാധനങ്ങൾ വാങ്ങി കൊടുക്കുക</strong>
-                        <span class="ml-2">(2 മണിക്കൂർ)</span>
-                    </li>
-
-                    <li>
-                        <strong>കുട്ടികൾ വായിച്ച ഒരു പുസ്തകത്തിന്റെ സംഗ്രഹം എഴുതി ക്ലാസ് ടീച്ചർക്ക് സമർപ്പിക്കുക</strong>
-                        <span class="ml-2">(1 മണിക്കൂർ)</span>
-                    </li>
-
-                    <li>
-                        <strong>സീഡ് പേന നിർമ്മിച്ച് സ്കൂളിൽ കൊണ്ടുവന്നു വില്പന നടത്തി ലഭിക്കുന്ന തുക ടിച്ചറെ ഏല്പിച്ച് അർഹതപ്പെട്ടവർക്ക് കൊടുക്കുക</strong>
-                        <span class="ml-2">(5 പേന / 2 മണിക്കൂർ)</span>
-                    </li>
-
-                    <li>
-                        <strong>കുട്ടികളുടെ അച്ഛനെയോ അമ്മയെയോ പഠിപ്പിച്ച അദ്ധ്യാപകനെ മാതാപിതാക്കൾക്കൊപ്പം അവരുടെ വീട്ടിൽ ചെന്ന് ആദരിക്കുക</strong>
-                        <span class="ml-2">(1 മണിക്കൂർ)</span>
-                    </li>
-
-                    <li>
-                        <strong>കുട്ടികൾ പഠിക്കുന്ന വിദ്യാലയത്തിൽ നിന്ന് വിരമിച്ച അദ്ധ്യാപകരെ വീട്ടിൽ ചെന്ന് ആദരിക്കുക.</strong>
-                        <span class="ml-2">(1 മണിക്കൂർ)</span>
-                    </li>
-
-                    <li>
-                        <strong>മദർ തെരേസ സേവന അവാർഡുമായി ബന്ധപ്പെട്ട പ്രവർത്തികൾ സോഷ്യൽ മീഡിയയിൽ പങ്കുവക്കുക.</strong>
-                        <span class="ml-2">(1 മണിക്കൂർ)</span>
-                    </li>
-
-                </ol>
-            </div>
-
-            <!-- Modal Footer -->
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-            </div>
-
+            <form id="addStudentForm">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addStudentModalLabel">Add Student</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="studentName" class="form-label">Name</label>
+                        <input type="text" class="form-control" id="studentName" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="studentClass" class="form-label">Class</label>
+                        <input type="text" class="form-control" id="studentClass" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="hoursAwarded" class="form-label">Hours Awarded</label>
+                        <input type="number" class="form-control" id="hoursAwarded" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
 
-
-        
-        <!-- Modal for Upload Excel -->
-<!-- Modal for Upload Form -->
-<div class="modal" id="uploadModal" tabindex="-1" role="dialog" aria-labelledby="uploadModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+<!-- Pop-up Form for Adding Additional Hours -->
+<div class="modal fade" id="addHoursModal" tabindex="-1" aria-labelledby="addHoursModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
         <div class="modal-content">
-
-            <!-- Modal Header -->
-            <div class="modal-header">
-                <h4 class="modal-title">Upload Excel</h4>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
-
-            <!-- Modal Body -->
-            <div class="modal-body">
-                <form id="uploadExcelForm">
-                    <div class="form-group">
-                        <label for="fileInput">Select Excel File:</label>
-                        <!-- Add this input element to your HTML for file upload -->
-                        <input type="file" id="fileInput" accept=".xlsx, .xls" onchange="handleFileSelect()">
+            <form id="addHoursForm">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addHoursModalLabel">Add Additional Hours</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p><strong>Student:</strong> <span id="studentNameAddHours"></span></p>
+                    <p><strong>Current Hours:</strong> <span id="currentHours"></span></p>
+                    <div class="mb-3">
+                        <label for="additionalHours" class="form-label">Additional Hours</label>
+                        <input type="number" class="form-control" id="additionalHours" required>
                     </div>
-                    <button type="button" class="btn btn-success" onclick="importExcel()">Upload</button>
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                </form>
-            </div>
-
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
 
-        <div class="row mt-4">
-            <div class="col-md-6">
-                <div class="table-container">
-                    <div class="fixed-header">
-                        <h2 class="text-center">HS Section</h2>
-                        <input type="text" id="hsSearch" class="form-control mb-2" placeholder="Search HS Section" class="search-bar">
-                    </div>
-                    <table id="hsTable" class="table table-dark table-striped-columns">
-                        <thead>
-                            <tr>
-                                <th>Rank</th>
-                                <th>Name</th>
-                                <th>Class</th>
-                                <th>Hours Awarded</th>
-                                <th>Change in Rank</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <!-- Data rows for the HS Section table will be dynamically added -->
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+<!-- JavaScript Libraries -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<script src="script.js"></script>
+<script>
+    // JavaScript code to filter student table based on search input
+    // Function to search for a student
+$('#searchInput').on('keyup', function() {
+    var searchText = $(this).val().toLowerCase();
 
-            <div class="col-md-6">
-                <div class="table-container">
-                    <div class="fixed-header">
-                        <h2 class="text-center">UP Section</h2>
-                        <input type="text" id="upSearch" class="form-control mb-2" placeholder="Search UP Section" class="search-bar">
-                    </div>
-                    <table id="upTable" class="table table-dark table-striped-columns">
-                        <thead>
-                            <tr>
-                                <th>Rank</th>
-                                <th>Name</th>
-                                <th>Class</th>
-                                <th>Hours Awarded</th>
-                                <th>Change in Rank</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <!-- Data rows for the UP Section table will be dynamically added -->
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
+    // Filter studentDetails array based on search input
+    var filteredStudents = studentDetails.filter(function(student) {
+        return student.name.toLowerCase().indexOf(searchText) !== -1 || student.class.toLowerCase().indexOf(searchText) !== -1;
+    });
 
-        
+    // Update the table with filtered data
+    updateTable(filteredStudents);
+});
 
-        
-    </div>
-
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.1/xlsx.full.min.js"></script>
-    <script src="script.js"></script>
+</script>
 </body>
 </html>
